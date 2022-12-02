@@ -3,7 +3,7 @@ mapping_dict = {"A": "Rock", "B": "Paper", "C": "Scissors",
                 "X": "Rock", "Y": "Paper", "Z": "Scissors"}
 outcome_dict = {"X": "Loss", "Y": "Draw", "Z": "Win"}
 outcome_selection_dict = {"XA": "Z", "XB": "X", "XC": "Y",
-                          "YA": "X", "YB": "Y", "YC": "Z", "ZA": "Y", "ZB": "Z", "ZC": "A"}
+                          "YA": "X", "YB": "Y", "YC": "Z", "ZA": "Y", "ZB": "Z", "ZC": "X"}
 
 
 def main(part):
