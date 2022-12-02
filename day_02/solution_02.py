@@ -25,6 +25,8 @@ def calculate_round_score(splitted_line, part):
         return calculate_selection_score(splitted_line[1]) + calculate_result_score(splitted_line[0], splitted_line[1])
     if part == 2:
         selection = outcome_selection_dict[splitted_line[1] + splitted_line[0]]
+        print("Chose " + mapping_dict[selection] + " to force a " +
+          outcome_dict[splitted_line[1]] + " against " + mapping_dict[splitted_line[0]])
         return calculate_selection_score(selection) + calculate_result_score(splitted_line[0], selection)
 
 
