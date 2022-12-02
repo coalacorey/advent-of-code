@@ -3,7 +3,8 @@ mapping_dict = {"A": "Rock", "B": "Paper", "C": "Scissors",
                 "X": "Rock", "Y": "Paper", "Z": "Scissors"}
 outcome_dict = {"X": "Loss", "Y": "Draw", "Z": "Win"}
 outcome_selection_dict = {"XA": "Z", "XB": "X", "XC": "Y",
-                          "YA": "X", "YB": "Y", "YC": "Z", "ZA": "Y", "ZB": "Z", "ZC": "X"}
+                          "YA": "X", "YB": "Y", "YC": "Z",
+                          "ZA": "Y", "ZB": "Z", "ZC": "X"}
 
 
 def main(part):
@@ -24,9 +25,8 @@ def calculate_round_score(splitted_line, part):
     if part == 1:
         return calculate_selection_score(splitted_line[1]) + calculate_result_score(splitted_line[0], splitted_line[1])
     if part == 2:
-        selection = outcome_selection_dict[splitted_line[1] + splitted_line[0]]
-        print("Chose " + mapping_dict[selection] + " to force a " +
-          outcome_dict[splitted_line[1]] + " against " + mapping_dict[splitted_line[0]])
+        selection = calculate_outcome_selection(
+            splitted_line[0], splitted_line[1])
         return calculate_selection_score(selection) + calculate_result_score(splitted_line[0], selection)
 
 
@@ -42,13 +42,20 @@ def calculate_result_score(opponent, selection):
         print("3 points for draw! Both chose " + mapping_dict[opponent])
         return 3
     if (diff == 1 or diff == -2):
-        print("0 points. " +
+        print("0 points for loss. " +
               mapping_dict[selection] + " loses to " + mapping_dict[opponent])
         return 0
     if (diff == -1 or diff == 2):
-        print("6 points! " +
+        print("6 points for win! " +
               mapping_dict[selection] + " beats " + mapping_dict[opponent])
         return 6
+
+
+def calculate_outcome_selection(opponent, outcome):
+    selection = outcome_selection_dict[outcome + opponent]
+    print("Chose " + mapping_dict[selection] + " to force a " +
+          outcome_dict[outcome] + " against " + mapping_dict[opponent])
+    return selection
 
 
 if __name__ == '__main__':
