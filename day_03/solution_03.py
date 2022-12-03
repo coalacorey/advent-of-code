@@ -5,7 +5,7 @@ def main():
     print("--- Day 3: Rucksack Reorganization ---")
     input = open('input.txt', 'r')
     prio_list = getPriorityList()
-    # solve_part_1(input, prio_list)
+    solve_part_1(input, prio_list)
     solve_part_2(input.readlines(), prio_list)
 
 
@@ -13,12 +13,12 @@ def solve_part_1(input, prio_list):
     prio_sum = 0
     for line in input:
         left, right = getRucksackCompartmentItems(line.replace('\n', ''))
+        intersection = list(set(left) & set(right))[0]
+        prio_sum += prio_list.index(intersection) + 1
         print(left)
         print(right)
-        intersection = list(set(left) & set(right))[0]
         print("Duplicate item: " + intersection + ", Priority: " +
               str(prio_list.index(intersection) + 1))
-        prio_sum += prio_list.index(intersection) + 1
     print(str(prio_sum))
 
 
