@@ -1,6 +1,9 @@
 import string
 
 
+# .strip() instead of replace and don't strip the strings, can be turned into sets directly from string
+
+
 def main():
     print("--- Day 3: Rucksack Reorganization ---")
     input = open('input.txt', 'r')
