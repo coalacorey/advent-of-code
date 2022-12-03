@@ -9,7 +9,7 @@ def main():
     input = open('input.txt', 'r')
     lines = input.readlines()
     lines_copy = lines.copy()
-    prio_list = getPriorityList()
+    prio_list = get_priority_list()
     solve_part_1(lines, prio_list)
     solve_part_2(lines_copy, prio_list)
 
@@ -17,7 +17,7 @@ def main():
 def solve_part_1(input, prio_list):
     prio_sum = 0
     for line in input:
-        left, right = getRucksackCompartmentItems(line.replace('\n', ''))
+        left, right = get_rucksack_compartment_items(line.replace('\n', ''))
         intersection = list(set(left) & set(right))[0]
         prio_sum += prio_list.index(intersection) + 1
         print(left)
@@ -27,7 +27,7 @@ def solve_part_1(input, prio_list):
     print(str(prio_sum))
 
 
-def getPriorityList():
+def get_priority_list():
     list = []
     for i in string.ascii_lowercase:
         list.append(i)
@@ -36,7 +36,7 @@ def getPriorityList():
     return list
 
 
-def getRucksackCompartmentItems(items):
+def get_rucksack_compartment_items(items):
     left = [*items[0:len(items)//2]]
     right = [*items[len(items)//2:]]
     return left, right
