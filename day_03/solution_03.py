@@ -4,9 +4,10 @@ import string
 def main():
     print("--- Day 3: Rucksack Reorganization ---")
     input = open('input.txt', 'r')
+    lines = input.readlines()
     prio_list = getPriorityList()
     solve_part_1(input, prio_list)
-    solve_part_2(input.readlines(), prio_list)
+    solve_part_2(lines, prio_list)
 
 
 def solve_part_1(input, prio_list):
