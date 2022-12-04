@@ -2,7 +2,6 @@ def main():
     print("--- Day 4: Camp Cleanup ---")
     input = open('input.txt', 'r')
     lines = input.readlines()
-    lines_copy = lines.copy()
     print("Solution part 1: " + str(solve_part_1(lines)))
     print("Solution part 2: " + str(solve_part_2(lines)))
 
