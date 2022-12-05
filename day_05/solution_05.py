@@ -11,25 +11,19 @@ def main():
 
 
 def solve_part_1(stacks, moves):
-    res = ""
     for move in moves:
         for _ in range(move[0]):
             stacks[move[2] - 1].append(stacks[move[1] - 1].pop())
-    for stack in stacks:
-        res = res + stack.pop()
-    return res
+    return get_stack_tops(stacks)
 
 
 def solve_part_2(stacks, moves):
-    res = ""
     for move in moves:
         temp = []
         for _ in range(move[0]):
             temp.append(stacks[move[1] - 1].pop())
         stacks[move[2] - 1] = stacks[move[2] - 1] + list(reversed(temp))
-    for stack in stacks:
-        res = res + stack.pop()
-    return res
+    return get_stack_tops(stacks)
 
 
 def extract_stacks(lines):
@@ -51,6 +45,13 @@ def extract_moves(lines):
         m = [int(n) for n in move.split() if n.isdigit()]
         temp.append(m)
     return temp
+
+
+def get_stack_tops(stacks):
+    res = ""
+    for stack in stacks:
+        res = res + stack.pop()
+    return res
 
 
 if __name__ == '__main__':
