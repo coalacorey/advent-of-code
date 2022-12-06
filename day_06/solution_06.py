@@ -13,12 +13,15 @@ def solve_part_2(datastream):
     return find_index_of_n_distinct_characters(datastream, 14)
 
 
-# Could implement loop skipping by adding k as offset to i for further performance improvements
 def find_index_of_n_distinct_characters(datastream, n):
+    offset = 0
     for i in range(0, len(datastream) - (n + 1)):
+        i = i + offset
+        offset = 0
         found = 1
         for k in range(0, n - 1):
             if datastream[i + k] in datastream[i+k+1:i+n]:
+                offset = k
                 break
             else:
                 found += 1
