@@ -2,7 +2,7 @@ import copy
 
 
 def main():
-    print("--- Day 5: Supply Stacks ---")
+    print("--- Day 6: Tuning Trouble ---")
     lines = open('input.txt', 'r').readlines()
     stacks = extract_stacks(lines)
     moves = extract_moves(lines)
