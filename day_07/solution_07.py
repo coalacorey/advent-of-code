@@ -1,7 +1,7 @@
 def main():
     print("--- Day 7: No Space Left On Device ---")
     input = open('input.txt', 'r').readlines()
-    # print_file_tree("/", get_dir_tree(input), 0)
+    # print_file_tree("/", get_dir_tree(input))
     print("Solution part 1: " + str(solve_part_1(input)))
     print("Solution part 2: " + str(solve_part_2(input)))
 
@@ -29,7 +29,7 @@ def solve_part_2(terminal_output):
     sorted_dirs_by_value = sorted(dirs_with_size.items(), key=lambda x: x[1])
     dirs_above_threshold = get_dirs_with_size_above_threshold(
         sorted_dirs_by_value, to_delete_space)
-    return dirs_above_threshold
+    return dirs_above_threshold[0]
 
 
 def get_dir_tree(commands):
@@ -131,16 +131,15 @@ def calc_dir_size(current_dir, dir_dict):
         return 0
 
 
-def print_file_tree(directory, dir_dict, level):
-    sep = ""
+def print_file_tree(directory, dir_dict):
     size = calc_dir_size(directory, dir_dict)
-    print(sep + directory + " : " + str(size))
+    print(directory + " : " + str(size))
     if directory in dir_dict:
         for f in dir_dict[directory]["f"]:
-            print(sep + directory + "/[" + f + "] : " +
+            print(directory + "/[" + f + "] : " +
                   str(dir_dict[directory]["f"][f]))
         for d in dir_dict[directory]["d"]:
-            print_file_tree(d, dir_dict, level + 1)
+            print_file_tree(d, dir_dict)
 
 
 def get_dirs_with_size_below_threshold(dirs, threshold):
