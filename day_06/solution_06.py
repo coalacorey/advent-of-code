@@ -1,5 +1,5 @@
 def main():
-    print("--- Day 5: Supply Stacks ---")
+    print("--- Day 6: Tuning Trouble ---")
     datastream = open('input.txt', 'r').readlines()[0]
     print("Solution part 1: " + str(solve_part_1(datastream)))
     print("Solution part 2: " + str(solve_part_2(datastream)))
