@@ -14,18 +14,18 @@ def main():
 
 def solve_part_1(input_rows, input_columns):
     num_visible_trees = 0
-    for row_index, trees in enumerate(copy.deepcopy(input_rows)):
+    for row_index, trees in enumerate(input_rows):
         for column_index, tree in enumerate(trees):
             visible = True
             if column_index != 0 and row_index != 0 and column_index != (len(input_columns) - 1) and row_index != (len(input_rows) - 1):
                 left = is_tree_visible_from_direction(
-                    tree, get_trees_left_or_up_from_tree(column_index, copy.deepcopy(trees)))
+                    tree, get_trees_left_or_up_from_tree(column_index, trees))
                 right = is_tree_visible_from_direction(
-                    tree, get_trees_right_or_down_from_tree(column_index, copy.deepcopy(trees)))
+                    tree, get_trees_right_or_down_from_tree(column_index, trees))
                 up = is_tree_visible_from_direction(tree, get_trees_left_or_up_from_tree(
-                    row_index, copy.deepcopy(input_columns)[column_index]))
+                    row_index, input_columns[column_index]))
                 down = is_tree_visible_from_direction(tree, get_trees_right_or_down_from_tree(
-                    row_index, copy.deepcopy(input_columns)[column_index]))
+                    row_index, input_columns[column_index]))
                 visible = left or right or up or down
             if (visible):
                 num_visible_trees += 1
@@ -34,18 +34,18 @@ def solve_part_1(input_rows, input_columns):
 
 def solve_part_2(input_rows, input_columns):
     highest_tree_score = 0
-    for row_index, trees in enumerate(copy.deepcopy(input_rows)):
+    for row_index, trees in enumerate(input_rows):
         for column_index, tree in enumerate(trees):
             score = 0
             if column_index != 0 and row_index != 0 and column_index != (len(input_columns) - 1) and row_index != (len(input_rows) - 1):
                 left = get_viewing_distance_for_direction(tree, list(
-                    reversed(get_trees_left_or_up_from_tree(column_index, copy.deepcopy(trees)))))
+                    reversed(get_trees_left_or_up_from_tree(column_index, trees))))
                 right = get_viewing_distance_for_direction(
-                    tree, get_trees_right_or_down_from_tree(column_index, copy.deepcopy(trees)))
+                    tree, get_trees_right_or_down_from_tree(column_index, trees))
                 up = get_viewing_distance_for_direction(tree, list(reversed(
-                    get_trees_left_or_up_from_tree(row_index, copy.deepcopy(input_columns)[column_index]))))
+                    get_trees_left_or_up_from_tree(row_index, input_columns[column_index]))))
                 down = get_viewing_distance_for_direction(tree, get_trees_right_or_down_from_tree(
-                    row_index, copy.deepcopy(input_columns)[column_index]))
+                    row_index, input_columns[column_index]))
                 score = left * right * up * down
                 if score > highest_tree_score:
                     highest_tree_score = score
