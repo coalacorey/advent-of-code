@@ -6,14 +6,15 @@ def main():
     datastream_rows = [l.strip() for l in open('input.txt', 'r').readlines()]
     datastream_columns = [[copy.deepcopy(datastream_rows)[j][i] for j in range(
         len(datastream_rows))] for i in range(len(datastream_rows[0]))]
-    print("Solution part 1: " + str(solve_part_1(copy.deepcopy(datastream_rows), copy.deepcopy(datastream_columns))))
-    print("Solution part 2: " + str(solve_part_2(copy.deepcopy(datastream_rows), copy.deepcopy(datastream_columns))))
+    print("Solution part 1: " + str(solve_part_1(copy.deepcopy(datastream_rows),
+          copy.deepcopy(datastream_columns))))
+    print("Solution part 2: " + str(solve_part_2(copy.deepcopy(datastream_rows),
+          copy.deepcopy(datastream_columns))))
 
 
 def solve_part_1(input_rows, input_columns):
     num_visible_trees = 0
     for row_index, trees in enumerate(copy.deepcopy(input_rows)):
-        tree_row = []
         for column_index, tree in enumerate(trees):
             visible = True
             if column_index != 0 and row_index != 0 and column_index != (len(input_columns) - 1) and row_index != (len(input_rows) - 1):
@@ -28,7 +29,6 @@ def solve_part_1(input_rows, input_columns):
                 visible = left or right or up or down
             if (visible):
                 num_visible_trees += 1
-            tree_row.append(visible)
     return num_visible_trees
 
 
@@ -66,13 +66,11 @@ def get_viewing_distance_for_direction(tree_size, trees_in_that_direction):
 
 
 def get_trees_left_or_up_from_tree(tree_index, row):
-    left = [t for i, t in enumerate(row) if i < tree_index]
-    return left
+    return [t for i, t in enumerate(row) if i < tree_index]
 
 
 def get_trees_right_or_down_from_tree(tree_index, row):
-    right = [t for i, t in enumerate(row) if i > tree_index]
-    return right
+    return [t for i, t in enumerate(row) if i > tree_index]
 
 
 if __name__ == '__main__':
