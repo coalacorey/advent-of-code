@@ -4,12 +4,10 @@ import copy
 def main():
     print("--- Day 8: Treetop Tree House ---")
     datastream_rows = [l.strip() for l in open('input.txt', 'r').readlines()]
-    datastream_columns = [[copy.deepcopy(datastream_rows)[j][i] for j in range(
+    datastream_columns = [[datastream_rows[j][i] for j in range(
         len(datastream_rows))] for i in range(len(datastream_rows[0]))]
-    print("Solution part 1: " + str(solve_part_1(copy.deepcopy(datastream_rows),
-          copy.deepcopy(datastream_columns))))
-    print("Solution part 2: " + str(solve_part_2(copy.deepcopy(datastream_rows),
-          copy.deepcopy(datastream_columns))))
+    print("Solution part 1: " + str(solve_part_1(datastream_rows, datastream_columns)))
+    print("Solution part 2: " + str(solve_part_2(datastream_rows, datastream_columns)))
 
 
 def solve_part_1(input_rows, input_columns):
