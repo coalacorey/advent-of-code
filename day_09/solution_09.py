@@ -4,29 +4,11 @@ import math
 def main():
     print("--- Day 9: Rope Bridge ---")
     datastream = open('input.txt', 'r').readlines()
-    print("Solution part 1: " + str(solve_part_1(datastream)))
-    print("Solution part 2: " + str(solve_part_2(datastream, 9)))
+    print("Solution part 1: " + str(solve_generic_for_n_knots(datastream, 1)))
+    print("Solution part 2: " + str(solve_generic_for_n_knots(datastream, 9)))
 
 
-def solve_part_1(datastream):
-    # Head, tail list variables keep track of their (x, y) positions
-    head = [[0, 0]]
-    tail = [[0, 0]]
-    for line in datastream:
-        line = line.split()
-        move = line[0]
-        steps = int(line[1])
-        for _ in range(steps):
-            update_head(head, move)
-            update_knot(tail, head[-1])
-    res = set()
-    for position in tail:
-        res.add(tuple(position))
-    return len(res)
-
-
-def solve_part_2(datastream, rope_length):
-    # Instead of head and tail, we save a rope with rope parts
+def solve_generic_for_n_knots(datastream, rope_length):
     initial_position = [0, 0]
     rope = []
     for _ in range(rope_length + 1):
