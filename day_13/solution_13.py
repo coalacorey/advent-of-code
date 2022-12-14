@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import functools
+from ast import literal_eval
 
 
 def main():
@@ -14,8 +15,8 @@ def solve_part_1(datastream) -> int:
     i = 0
     while i in range(len(datastream) - 1):
         pair = []
-        pair.append(eval(str(datastream[i].strip())))
-        pair.append(eval(str(datastream[i + 1].strip())))
+        pair.append(literal_eval(str(datastream[i].strip())))
+        pair.append(literal_eval(str(datastream[i + 1].strip())))
         signal_pairs.append(pair)
         i += 3
 
@@ -30,7 +31,8 @@ def solve_part_2(datastream):
     signal_pairs = []
     for i in range(len(datastream)):
         if len(datastream[i].strip()) > 0:
-            signal_pairs.append(tuple(eval(str(datastream[i].strip()))))
+            signal_pairs.append(
+                tuple(literal_eval(str(datastream[i].strip()))))
 
     signal_pairs.append(tuple([[2]]))
     signal_pairs.append(tuple([[6]]))
