@@ -79,21 +79,9 @@ def parse_input(input):
     sensor_dict = dict()
     sensors = []
     beacons = []
-    min_x, min_y = 1e7, 1e7
-    max_x, max_y = 1 - 1e7, 1 - 1e7
     for line in input:
         temp = re.findall('-?\d+\.?\d*', line)
         res = list(map(int, temp))
-        res_x = [res[i] for i in range(len(res)) if i % 2 == 0]
-        res_y = [res[i] for i in range(len(res)) if i % 2 == 1]
-        if min(res_x) < min_x:
-            min_x = min(res_x)
-        if min(res_y) < min_y:
-            min_y = min(res_y)
-        if max(res_x) > max_x:
-            max_x = max(res_x)
-        if max(res_y) > max_y:
-            max_y = max(res_y)
         sensors.append([res[0], res[1]])
         beacons.append([res[2], res[3]])
     for i, sensor in enumerate(sensors):
