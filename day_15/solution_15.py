@@ -16,20 +16,12 @@ def solve_part_1(input):
     loops = 0
     for sensor in find_sensors_affecting_row(sensor_dict, row):
         dist_to_row = abs(row - sensor[1])
-        if sensor[1] <= row:
-            x_to_check = sensor_dict[sensor] - dist_to_row
-            for x in range(sensor[0] - x_to_check, sensor[0] + x_to_check + 1):
-                if ((x, row)) not in blocked:
-                    if manhatten_distance(sensor, (x, row)) <= sensor_dict[sensor]:
-                        blocked.add((x, row))
-                        loops += 1
-        elif sensor[1] > row:
-            x_to_check = sensor_dict[sensor] - dist_to_row
-            for x in range(sensor[0] - x_to_check, sensor[0] + x_to_check + 1):
-                if ((x, row)) not in blocked:
-                    if manhatten_distance(sensor, (x, row)) <= sensor_dict[sensor]:
-                        blocked.add((x, row))
-                        loops += 1
+        x_to_check = sensor_dict[sensor] - dist_to_row
+        for x in range(sensor[0] - x_to_check, sensor[0] + x_to_check + 1):
+            if ((x, row)) not in blocked:
+                if manhatten_distance(sensor, (x, row)) <= sensor_dict[sensor]:
+                    blocked.add((x, row))
+                    loops += 1
 
     beacons_in_row = set([(b[0], b[1]) for b in beacons if b[1] == row])
     return len(blocked) - len(beacons_in_row)
