@@ -13,7 +13,6 @@ def solve_part_1(input):
     sensor_dict, beacons = parse_input(input)
     blocked = set()
     row = 2000000
-    loops = 0
     for sensor in find_sensors_affecting_row(sensor_dict, row):
         dist_to_row = abs(row - sensor[1])
         x_to_check = sensor_dict[sensor] - dist_to_row
@@ -21,8 +20,6 @@ def solve_part_1(input):
             if ((x, row)) not in blocked:
                 if manhatten_distance(sensor, (x, row)) <= sensor_dict[sensor]:
                     blocked.add((x, row))
-                    loops += 1
-
     beacons_in_row = set([(b[0], b[1]) for b in beacons if b[1] == row])
     return len(blocked) - len(beacons_in_row)
 
@@ -31,7 +28,6 @@ def solve_part_2(input):
     lower_bound = 0
     upper_bound = 4000000
     sensor_dict, _beacons = parse_input(input)
-
     res = 0
     for row in range(lower_bound, upper_bound):
         ranges = []
