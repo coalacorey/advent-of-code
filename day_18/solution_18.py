@@ -33,17 +33,16 @@ def solve_part_1(input):
 
 def solve_part_2(input):
     sys.setrecursionlimit(10000)
-    surface_area = 0
+    surface_area = solve_part_1(input)
     cubes = parse_input(input)
-    connected_cubes = []
     big_droplet = set()
-    while len(cubes) > 0:
+    while cubes:
         cube = cubes[0]
-        connected = get_connected_cubes(cube, cubes, set()) | {cube}
-        connected_cubes.append(connected)
+        connected = iter_connected_cubes(cube, cubes)
         big_droplet = big_droplet | connected
-    for droplet in connected_cubes:
-        surface_area += calculate_surface_area(droplet)
+        for c in connected:
+            if c in cubes:
+                cubes.remove(c)
     holes = find_holes_in_droplet(big_droplet)
     hole_space = set()
     for x in range(-1, 21):
@@ -145,25 +144,6 @@ def iter_connected_cubes(cube, cubes):
             if c not in visited:
                 to_visit.append(c)
     return cube_connections
-
-
-def get_connected_holes(cube, cubes, complete_set, outside):
-    if cube in outside:
-        return set()
-    if cube in cubes:
-        cubes.remove(cube)
-    else:
-        return set()
-    complete_set.add(cube)
-    cube_set = {c for c in cubes if connected(cube, c)}
-    if len(cube_set) > 0:
-        if len(cube_set & outside) > 0:
-            return cube_set
-        for c in cube_set:
-            if c not in complete_set:
-                cube_set = cube_set | get_connected_holes(
-                    c, cubes, complete_set, outside)
-    return cube_set
 
 
 def get_directly_connected_cubes(cube, cubes):
