@@ -21,7 +21,7 @@ def solve_part_1(input):
     connected_cubes = []
     while cubes:
         cube = cubes.pop(0)
-        cs = iter_connected_cubes(cube, cubes)
+        cs = get_connected_cubes(cube, cubes)
         connected_cubes.append(cs)
         for c in cs:
             if c in cubes:
@@ -38,17 +38,13 @@ def solve_part_2(input):
     big_droplet = set()
     while cubes:
         cube = cubes[0]
-        connected = iter_connected_cubes(cube, cubes)
+        connected = get_connected_cubes(cube, cubes)
         big_droplet = big_droplet | connected
         for c in connected:
             if c in cubes:
                 cubes.remove(c)
     holes = find_holes_in_droplet(big_droplet)
-    hole_space = set()
-    for x in range(-1, 21):
-        for y in range(-1, 21):
-            for z in range(-1, 21):
-                hole_space.add((x, y, z))
+    hole_space = {(x, y, z) for x in range(0,20) for y in range (0, 20) for z in range(0, 20)}
     hole_space = hole_space - big_droplet
     outside = (hole_space - holes)
     to_delete = set()
@@ -56,7 +52,7 @@ def solve_part_2(input):
     while holes:
         hole = holes.pop()
         if hole not in to_delete and hole not in holes_visited:
-            hole_connections = iter_connected_cubes(hole, set(hole_space))
+            hole_connections = get_connected_cubes(hole, set(hole_space))
             if len(hole_connections & outside) > 0:
                 to_delete = to_delete | hole_connections
                 to_delete.add(hole)
@@ -111,22 +107,7 @@ def parse_input(input):
     return cubes
 
 
-def get_connected_cubes(cube, cubes, complete_set):
-    if cube in cubes:
-        cubes.remove(cube)
-    else:
-        return set()
-    complete_set.add(cube)
-    cube_set = {c for c in cubes if connected(cube, c)}
-    if len(cube_set) > 0:
-        for c in cube_set:
-            if c not in complete_set:
-                cube_set = cube_set | get_connected_cubes(
-                    c, cubes, complete_set)
-    return cube_set
-
-
-def iter_connected_cubes(cube, cubes):
+def get_connected_cubes(cube, cubes):
     cube_connections = set()
     cube_connections.add(cube)
     to_visit = [cube]
