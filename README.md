@@ -1,2 +1,6 @@
-# advent-of-code-2022
-Solutions for the 2022 iteration of '[Advent of Code](https://adventofcode.com/)'.
+# Advent of Code
+
+My solutions for '[Advent of Code](https://adventofcode.com/)'.
+
+2022: Python
+2023: TBD
