@@ -1,7 +1,7 @@
 import `2023`.InputParser
 
 fun main() {
-    print("--- Day X ---")
+    println("--- Day X ---")
     val input = InputParser.getInputAsStringList(".")
     println("Solution part 1: " + solvePart1(input))
     println("Solution part 2: " + solvePart2(input))
